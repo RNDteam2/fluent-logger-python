@@ -66,6 +66,8 @@ class FluentSender(object):
                  use_ssl=False,
                  ssl_context_args={},
                  ssl_server_hostname="",
+                 client_cert="",
+                 client_key="",
                  **kwargs):
         """
         :param kwargs: This kwargs argument is not used in __init__. This will be removed in the next major version.
@@ -82,6 +84,8 @@ class FluentSender(object):
         self.ssl = use_ssl
         self.ssl_context_args = ssl_context_args
         self.ssl_server_hostname = ssl_server_hostname
+        self.client_cert = client_cert
+        self.client_key = client_key
 
         self.socket = None
         self.pendings = None
@@ -217,6 +221,8 @@ class FluentSender(object):
             return sock
 
         context = ssl.create_default_context(**self.ssl_context_args)
+        if self.client_cert and self.client_key:
+            context.load_cert_chain(certfile=self.client_cert, keyfile=self.client_key)
         return context.wrap_socket(
             sock, server_hostname=self.ssl_server_hostname)
 
