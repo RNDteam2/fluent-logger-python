@@ -66,8 +66,8 @@ class FluentSender(object):
                  use_ssl=False,
                  ssl_context_args={},
                  ssl_server_hostname="",
-                 client_cert="",
-                 client_key="",
+                 client_cert=None,
+                 client_key= None,
                  **kwargs):
         """
         :param kwargs: This kwargs argument is not used in __init__. This will be removed in the next major version.
