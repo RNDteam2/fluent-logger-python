@@ -212,7 +212,8 @@ class FluentSender(object):
             sent = self.socket.send(bytes_[bytes_sent:])
             if sent == 0:
                 raise socket.error(errno.EPIPE, "Broken pipe")
-            LOGGER.debug("Sent {} bytes".format(str(sent)))
+            # comment exceedingly verbose line
+            #LOGGER.debug("Sent {} bytes".format(str(sent)))
             bytes_sent += sent
         self._check_recv_side()
 
